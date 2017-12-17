@@ -1,9 +1,3 @@
-<?php
-
-/* @var $this yii\web\View */
-
-$this->title = 'My Yii Application';
-?>
 <section class="main clearfix">
     <div class="work">
         <a href="inner.html">

@@ -1,15 +1,21 @@
-Options +FollowSymLinks
-IndexIgnore */*
-RewriteEngine on
+Options -Indexes
+Options -MultiViews
 
-RewriteCond %{REQUEST_URI} !^/(web)
-RewriteRule ^assets/(.*)$ /web/assets/$1 [L]
-RewriteRule ^css/(.*)$ web/css/$1 [L]
-RewriteRule ^js/(.*)$ web/js/$1 [L]
-RewriteRule ^img/(.*)$ web/img/$1 [L]
-RewriteRule ^fonts/(.*)$ web/fonts/$1 [L]
-RewriteRule (.*) /web/$1
+<IfModule mod_rewrite.c>
+  Options +FollowSymLinks
+  IndexIgnore */*
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /web/index.php
+	RewriteEngine On
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+
+	RewriteRule ^$ /web/ [L]
+	RewriteRule ^(.*)$ /web/$1
+</IfModule>
+
+# Deny accessing dot files
+RewriteRule (^\.|/\.) - [F]
+
+<IfModule !mod_rewrite.c>
+	ErrorDocument 404 /index.php
+</IfModule>
