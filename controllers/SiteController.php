@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\SignupForm;
 
 class SiteController extends Controller
 {
@@ -52,6 +53,16 @@ class SiteController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+
+    // Проверка пользователя
+
+    public function beforeAction($action)
+    {
+        if (Yii::$app->user->isGuest && ($action->id != 'login' && $action->id != 'signup')) {
+            return $this->redirect(['/site/login']);
+        }
+        return true;
     }
 
     /**
@@ -129,5 +140,23 @@ class SiteController extends Controller
     public function actionPost()
     {
         return $this->render('post');
+    }
+
+    // Направление пользователя на регистрацию
+
+    public function actionSignup()
+    {
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->goHome();
+                }
+            }
+        }
+
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
     }
 }
