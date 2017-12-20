@@ -1,23 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 17.12.2017
- * Time: 22:15
- */
 
 namespace app\models;
 
-
+use Yii;
 use yii\base\Model;
-
-
 
 /**
  * Signup form
  */
 class SignupForm extends Model
 {
+
     public $username;
     public $email;
     public $password;
@@ -28,16 +21,15 @@ class SignupForm extends Model
     public function rules()
     {
         return [
-            ['username', 'filter', 'filter' => 'trim'],
+            ['username', 'trim'],
             ['username', 'required'],
-//            ['username', 'unique', 'targetClass' => 'User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => '\app\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
-
-//            ['email', 'filter', 'filter' => 'trim'],
-//            ['email', 'required'],
-//            ['email', 'email'],
-//            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
-
+            ['email', 'trim'],
+            ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'string', 'max' => 255],
+            ['email', 'unique', 'targetClass' => '\app\models\User', 'message' => 'This email address has already been taken.'],
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
         ];
@@ -50,17 +42,17 @@ class SignupForm extends Model
      */
     public function signup()
     {
-        if ($this->validate()) {
 
-            $user = new \app\models\User();
-            $user->username = $this->username;
-            //$user->email = $this->email;
-            $user->setPassword($this->password);
-            //$user->generateAuthKey();
-            $user->save();
-            return $user;
+        if (!$this->validate()) {
+            return null;
         }
 
-        return null;
+        $user = new User();
+        $user->username = $this->username;
+        $user->email = $this->email;
+        $user->setPassword($this->password);
+        $user->generateAuthKey();
+        return $user->save() ? $user : null;
     }
+
 }
