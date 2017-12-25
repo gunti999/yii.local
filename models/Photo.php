@@ -15,9 +15,4 @@ use yii\db\ActiveRecord;
 class Photo extends ActiveRecord
 {
 
-    public function getImage(){
-
-        return $this->file;
-
-    }
 }

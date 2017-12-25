@@ -1,5 +1,6 @@
 <?php
 use app\models\Photo;
+use yii\helpers\Html;
 ?>
 
 <section class="main clearfix">
@@ -12,11 +13,11 @@ foreach ($photos as $photo){
 ?>
 
     <div class="work">
-        <a href="site/post">
+        <a href="site/post?photo_id=<?=$photo['photo_id']?>">
             <img src="<?='uploads/'.$photo['link']?>" class="media" alt=""/>
             <div class="caption">
                 <div class="work_title">
-                    <h1>culpa qui officia deserunt mollit</h1>
+                    <h1><?=$photo['link']?></h1>
                 </div>
             </div>
         </a>

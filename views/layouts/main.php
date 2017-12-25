@@ -39,7 +39,7 @@ AppAsset::register($this);
             <li><a href="#">Сообщения</a></li>
             <li><?= Html::a('Добавить фото', ['upload']) ?></a></li>
             <li><a href="#">Профиль</a></li>
-            <li><a href="#"><?= Html::a('Выход ' . Yii::$app->user->identity->username, ['site/logout'], ['data' => ['method' => 'post']]) ?></a></li>
+            <li><?= Html::a('Выход ' . Yii::$app->user->identity->username, ['site/logout'], ['data' => ['method' => 'post']]) ?></li>
         </ul>
     </nav><!-- end navigation menu -->
 
