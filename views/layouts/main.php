@@ -37,7 +37,7 @@ AppAsset::register($this);
         <ul>
             <li><a href="http://yii.local/" class="selected">Главная</a></li>
             <li><a href="#">Сообщения</a></li>
-            <li><a href="#">Добавить фото</a></li>
+            <li><?= Html::a('Добавить фото', ['upload']) ?></a></li>
             <li><a href="#">Профиль</a></li>
             <li><a href="#"><?= Html::a('Выход ' . Yii::$app->user->identity->username, ['site/logout'], ['data' => ['method' => 'post']]) ?></a></li>
         </ul>

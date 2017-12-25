@@ -1,7 +1,19 @@
+<?php
+use app\models\Photo;
+?>
+
 <section class="main clearfix">
+
+<?php
+//$photos = Photo::find()->asArray()->where(array('id' => Yii::$app->user->id));
+$photos = Photo::find()->where(array('id' => Yii::$app->user->id))->asArray()->all();
+
+foreach ($photos as $photo){
+?>
+
     <div class="work">
-        <a href="inner.html">
-            <img src="img/work1.jpg" class="media" alt=""/>
+        <a href="site/post">
+            <img src="<?='uploads/'.$photo['link']?>" class="media" alt=""/>
             <div class="caption">
                 <div class="work_title">
                     <h1>culpa qui officia deserunt mollit</h1>
@@ -10,91 +22,8 @@
         </a>
     </div>
 
-    <div class="work">
-        <a href="inner.html">
-            <img src="img/work2.jpg" class="media" alt=""/>
-            <div class="caption">
-                <div class="work_title">
-                    <h1>culpa qui officia deserunt mollit</h1>
-                </div>
-            </div>
-        </a>
-    </div>
+   <?php
+}
+?>
 
-    <div class="work">
-        <a href="inner.html">
-            <img src="img/work3.jpg" class="media" alt=""/>
-            <div class="caption">
-                <div class="work_title">
-                    <h1>culpa qui officia deserunt mollit</h1>
-                </div>
-            </div>
-        </a>
-    </div>
-
-    <div class="work">
-        <a href="inner.html">
-            <img src="img/work4.jpg" class="media" alt=""/>
-            <div class="caption">
-                <div class="work_title">
-                    <h1>culpa qui officia deserunt mollit</h1>
-                </div>
-            </div>
-        </a>
-    </div>
-
-    <div class="work">
-        <a href="inner.html">
-            <img src="img/work5.jpg" class="media" alt=""/>
-            <div class="caption">
-                <div class="work_title">
-                    <h1>culpa qui officia deserunt mollit</h1>
-                </div>
-            </div>
-        </a>
-    </div>
-
-    <div class="work">
-        <a href="inner.html">
-            <img src="img/work6.jpg" class="media" alt=""/>
-            <div class="caption">
-                <div class="work_title">
-                    <h1>culpa qui officia deserunt mollit</h1>
-                </div>
-            </div>
-        </a>
-    </div>
-
-    <div class="work">
-        <a href="inner.html">
-            <img src="img/work2.jpg" class="media" alt=""/>
-            <div class="caption">
-                <div class="work_title">
-                    <h1>culpa qui officia deserunt mollit</h1>
-                </div>
-            </div>
-        </a>
-    </div>
-
-    <div class="work">
-        <a href="inner.html">
-            <img src="img/work3.jpg" class="media" alt=""/>
-            <div class="caption">
-                <div class="work_title">
-                    <h1>culpa qui officia deserunt mollit</h1>
-                </div>
-            </div>
-        </a>
-    </div>
-
-    <div class="work">
-        <a href="inner.html">
-            <img src="img/work1.jpg" class="media" alt=""/>
-            <div class="caption">
-                <div class="work_title">
-                    <h1>culpa qui officia deserunt mollit</h1>
-                </div>
-            </div>
-        </a>
-    </div>
 </section><!-- end main -->

@@ -11,6 +11,7 @@ use app\models\ContactForm;
 use app\models\SignupForm;
 use app\models\UploadForm;
 use yii\web\UploadedFile;
+use app\models\Photo;
 
 class SiteController extends Controller
 {
@@ -136,14 +137,23 @@ class SiteController extends Controller
     {
         $model = new UploadForm();
 
+
         if (Yii::$app->request->isPost) {
             $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
             if ($model->upload()) {
-                // file is uploaded successfully
-                return;
+                foreach ($model->imageFiles as $file) {
+                    $photo = new Photo();
+                    $photo->link = $file->name;
+                    $photo->id = Yii::$app->user->id;
+                    $photo->save(false);
+                }
+
+                return $this->redirect(['/']);
             }
         }
 
         return $this->render('upload', ['model' => $model]);
     }
+
+
 }

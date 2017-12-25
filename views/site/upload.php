@@ -1,6 +1,8 @@
 <?php
 use yii\widgets\ActiveForm;
+
 ?>
+<section class="main clearfix">
 <div class="container">
     <h1>Загрузка фото</h1>
 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
@@ -11,3 +13,4 @@ use yii\widgets\ActiveForm;
 
 <?php ActiveForm::end() ?>
 </div>
+</section>
